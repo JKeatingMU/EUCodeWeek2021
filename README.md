@@ -36,3 +36,11 @@ SVG is to graphics what HTML is to text. It is a text-based (XML), open Web stan
 SVG images and their accompanying behaviours are defined using pure XML text files, which means they can be searched, indexed, scripted, etc. Every element and attribute of the image can be animated. They can be created and edited with any text editor, with drawing software, or created using programs (like we will be doing in this module).
 
 Compared to classic (bitmapped) image formats such as JPEG or PNG, vector images such as SVG can be rendered at any resolution without loss of quality. They can be easily localised,  without the need of a graphical editor, by updating the embedded text using a text editor. With a proper understanding of their construction, and using libraries or custom-written programs, SVG files can be localised interactively.
+
+## Sections to Follow just before Workshop!
+
+This document will be updated on the morning of the workshop.
+
+## Summary
+
+We learned about creating, manipulating and interacting with SVGs (Scalable Vector Graphics).
