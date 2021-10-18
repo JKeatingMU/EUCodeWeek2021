@@ -1,0 +1,182 @@
+<html>
+
+<head>
+    <title>Working with Inline and External SVGs</title>
+
+    <style>
+        .myDisplayBox {
+            border: 1px solid black;
+            font-family: "Lucida Console", "Courier New", monospace;
+            color: white;
+            height: 200px;
+            width: 400px;
+            background-color: grey;
+            padding: 10px;
+            margin: 10 auto;
+        }
+
+        .mySVGBox {
+            height: 250px;
+            width: 400px;
+            border: 1px solid black;
+            margin: auto;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #myDisplayBoxTitle {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 16pt;
+            text-align: center;
+            color: black;
+            margin: 10 auto;
+        }
+
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        svg,
+        object {
+            border: 1px solid grey;
+            display: block;
+            margin: auto;
+        }
+
+        .button {
+            border: none;
+            color: white;
+            padding: 13px 39px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .butGreen {
+            background-color: #4CAF50;
+        }
+
+        .butBlue {
+            background-color: #008CBA;
+        }
+    </style>
+
+    <script type="text/javascript">
+    function boo () {
+        alert("Boo!!");
+    }
+    </script>
+</head>
+
+<body>
+    <h1>Working with Inline and External SVGs</h1>
+
+    <div class="mySVGBox">
+        <h1>External SVG Content</h1>
+        <object id="mySVGExternal" data="./mySVG.svg" type="image/svg+xml" width="200" height="100"></object>
+        <br />
+        <button class="button butBlue">MOVE</button>
+        <button class="button butBlue">ADD</button>
+        <button class="button butBlue">DISPLAY</button>
+    </div>
+    <div class="mySVGBox">
+        <h1>Inline SVG Content</h1>
+        <svg id="mySVGInline" width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+            <circle id="circle" cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="white" />
+        </svg>
+        <br />
+        <button class="button butGreen" onclick="boo();">MOVE</button>
+        <button class="button butGreen">ADD</button>
+        <button class="button butGreen">DISPLAY</button>
+    </div>
+
+    <div id="myDisplayBoxTitle"></div>
+    <div id="myXMLDisplay" class="myDisplayBox"></div>
+
+
+    <script type="text/javascript">
+        //
+        // REFERENCING THE SVG
+        //
+
+        // get reference to the inline SVG
+        var svgInline = document.getElementById('mySVGInline');
+        // console.log(svgInline);
+        // get reference to the external SVG (loaded as object)
+        var svgExternal = document.getElementById('mySVGExternal');
+        // console.log(svgExternal);
+        // if you have more than one inline SVGs; you can index them!
+        var svg = document.getElementsByTagName('svg')[0];
+        // console.log(svg);
+
+        //
+        // REFERENCING ELEMENTS
+        //
+
+        // inline reference
+        var element = document.getElementById('circle');
+        // move the selected inline element 50px to right
+        var cx = parseFloat(element.getAttributeNS(null, 'cx'));
+        element.setAttributeNS(null, 'cx', cx + 50);
+
+
+        // external reference
+        window.addEventListener("load", function () {
+            var svgObject = document.getElementById('mySVGExternal').getSVGDocument(); // or .contentDocument
+            var element = svgObject.getElementById('circle');
+            // move the selected inline element 50px to right
+            var cx = parseFloat(element.getAttributeNS(null, 'cx'));
+            element.setAttributeNS(null, 'cx', cx + 50);
+        });
+
+
+        //
+        // ADDING NEW ELEMENTS 
+        //
+        var svgNS = "http://www.w3.org/2000/svg";
+        var circle = document.createElementNS(svgNS, "circle");
+        circle.setAttributeNS(null, "cx", 150);
+        circle.setAttributeNS(null, "cy", 50);
+        circle.setAttributeNS(null, "r", 10);
+        circle.setAttributeNS(null, "fill", "green");
+        circle.setAttributeNS(null, "stroke", "black");
+        svgInline.appendChild(circle);
+
+        // display the SVG as XML to the diaplay box
+        // access the SVG Content as <xml>
+        /**
+    var displayBox = document.getElementById('myXMLDisplay');
+    displayBox.textContent = svgInline.innerHTML;
+    document.getElementById('myDisplayBoxTitle').innerHTML = "Inline SVG!";
+    */
+
+        // external reference
+        window.addEventListener("load", function () {
+            var svgObject = document.getElementById('mySVGExternal').contentDocument.rootElement; // or .documentElement
+            var svgNS = "http://www.w3.org/2000/svg";
+            var circle = document.createElementNS(svgNS, "circle");
+            circle.setAttributeNS(null, "cx", 150);
+            circle.setAttributeNS(null, "cy", 50);
+            circle.setAttributeNS(null, "r", 10);
+            circle.setAttributeNS(null, "fill", "blue");
+            circle.setAttributeNS(null, "stroke", "black");
+            svgObject.appendChild(circle);
+
+            // display the SVG as XML to the display box
+            // access the SVG Content as <xml>
+            var displayBox = document.getElementById('myXMLDisplay');
+            displayBox.textContent = svgObject.innerHTML;
+            document.getElementById('myDisplayBoxTitle').innerHTML = "Current Externally-loaded SVG !";
+        });
+    </script>
+
+
+
+</body>
+
+</html>

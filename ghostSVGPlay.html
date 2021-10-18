@@ -1,0 +1,421 @@
+<html>
+
+<head>
+    <title>Manipulating Ghost Features</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .myDisplayBox {
+            border: 1px solid black;
+            font-family: "Lucida Console", "Courier New", monospace;
+            color: white;
+            height: 490px;
+            width: 420px;
+            background-color: grey;
+            margin: auto;
+            margin-top: 10px;
+            padding: 10px;
+            overflow: scroll;
+        }
+
+        .mySVGBox {
+            height: 490px;
+            width: 420px;
+            border: 1px solid black;
+            margin: auto;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        .myControlsBox {
+            height: 490px;
+            width: 420px;
+            border: 1px solid black;
+            margin: auto;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #myDisplayBoxTitle {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 16pt;
+            text-align: center;
+            color: black;
+            margin: 10 auto;
+        }
+
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        label {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            text-align: right;
+            top: +5px;
+            position: relative;
+            float: right;
+        }
+
+        svg,
+        object {
+            border: 1px solid grey;
+            display: block;
+            margin: auto;
+        }
+
+        .button {
+            border: none;
+            color: white;
+            padding: 13px 44px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .butGreen {
+            background-color: #4CAF50;
+        }
+
+        .butBlue {
+            background-color: #008CBA;
+        }
+    </style>
+
+    <style>
+        /* Slider Code is mostly (c) W3Schools.com (https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_rangeslider) */
+
+        .slider {
+            -webkit-appearance: none;
+            width: 320px;
+            /* 100% */
+            height: 25px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: black;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: black;
+            cursor: pointer;
+        }
+    </style>
+
+    <style>
+        /* Three columns that float next to each other */
+        .column {
+            float: left;
+            margin: 30px;
+        }
+
+        .left,
+        .right,
+        .middle {
+            width: 440px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+
+    <style>
+        .arrow {
+            border: solid #008CBA;
+            border-width: 0 4px 4px 0;
+            display: inline-block;
+            padding: 4px;
+        }
+
+        .arrow:hover {
+            border: solid red;
+            border-width: 0 4px 4px 0;
+            display: inline-block;
+            padding: 4px;
+        }
+
+        .aright {
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+        }
+
+        .aleft {
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
+
+        .aup {
+            transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+        }
+
+        .adown {
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+        }
+    </style>
+
+    <style type="text/css">
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin: 0px auto;
+        }
+
+        .tg td {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 5px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 5px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-cly1 {
+            text-align: center;
+            vertical-align: middle
+        }
+    </style>
+
+    <script type="text/javascript">
+        // 
+        // Display the current SVG content (loaded as <object> when page loads)
+        //
+        function displayXML() {
+            var svgObject = document.getElementById('mySVGExternal').contentDocument.rootElement;
+            var displayBox = document.getElementById('myXMLDisplay');
+            displayBox.textContent = '<svg  width="400" height="480" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">' + svgObject.innerHTML +
+                                     "</svg>";
+        }
+
+        // 
+        // Rotate the "Ghost" content by updating the transform attribute
+        //
+        function rotateGhost() {
+            var svgObject = document.getElementById('mySVGExternal').contentDocument;
+            svgObject.getElementById('ghost').setAttribute('transform', 'rotate(10), translate(0,0), scale (1.0)');
+        }
+
+        //
+        //
+        //
+        function eyes() {
+            // simple manipulation of the transform attribute for the eyes group
+            // extract the current position and increment the x and y coordinates by 10px
+            var svgObject = document.getElementById('mySVGExternal').contentDocument;
+            var eyes = svgObject.getElementById('eyes');
+            var transform = eyes.getAttributeNS(null, 'transform');
+            let reTranslate = /translate\(\-*\d+\,\-*\d+\)/i;       // get the translate arrtibute using a regular expression
+            let reCoords = /\-*\d+/g;                               // get the coordinates
+            var translate = reTranslate.exec(transform);            // match the re to extract the transform string
+            var coords = translate.toString().match(reCoords);      // match the re to extract the coordinates 
+            var x = parseFloat(coords[0]) + getRandomInt(-5, 5);    // extract the x value and add random value
+            var y = parseFloat(coords[1]) + getRandomInt(-5, 5);    // extract the y value and add random value
+            eyes.setAttribute('transform', 'rotate(0,50,40), translate(' + x + ',' + y + '), scale(1.0)');
+            //alert('rotate(10), translate(' + x + ',' +y + '), scale(1.0)');
+        }
+
+        // move eyes up/down or left/right
+        function moveEyesSLider(slider, direction) {
+            var svgObject = document.getElementById('mySVGExternal').contentDocument;
+            var eyes = svgObject.getElementById('eyes');
+            var transform = eyes.getAttributeNS(null, 'transform');
+            let reTranslate = /translate\(\-*\d+\,\-*\d+\)/i;       // get the translate arrtibute using a regular expression
+            let reCoords = /\-*\d+/g;                               // get the coordinates
+            var translate = reTranslate.exec(transform);            // match the re to extract the transform string
+            var coords = translate.toString().match(reCoords);      // match the re to extract the coordinates 
+            var x = parseFloat(coords[0]);                          // extract the x value and add random value
+            var y = parseFloat(coords[1]);                          // extract the y value and add random value
+            // get the slider value
+            var value =  10 - parseFloat(slider.value);
+            if (direction=="x") {
+                x = value;
+            } else {
+                y = value;
+            }
+            eyes.setAttribute('transform', 'rotate(0,50,40), translate(' + x + ',' + y + '), scale(1.0)');
+        }
+
+        // random Number generator (whole numbers)
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Manipulating Ghost Features</h1>
+
+    <div class="row">
+        <div class="myControlsBox column left">
+            <input type="range" name="eyeL" min="1" max="20" value="10" class="slider" id="eyeLRange" oninput="moveEyesSLider(this,'y')">
+            <label for="eyeL">EYE(U-D)</label>
+            <input type="range" name="eyeR" min="1" max="20" value="10" class="slider" id="eyeRRange"  oninput="moveEyesSLider(this,'x')">
+            <label for="eyeL">EYE(L-R)</label>
+            <br /><br />
+            <div style="width: 480px;">
+                <button class="button butBlue" onclick="eyes();">EYES</button>
+                <button class="button butBlue" onclick="rotateGhost();">ROTATE</button>
+                <button class="button butBlue" onclick="displayXML();">DISPLAY</button>
+            </div>
+            <br /><br />
+            <div style="margin: 0 auto; width: 180px;">
+                <table class="tg" style="float:left;">
+                    <tbody>
+                        <tr>
+                            <td class="tg-cly1" colspan="3"><i class="arrow aup" onclick="moveup()"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-cly1"><i class="arrow aleft" onclick="moveleft()"></i></td>
+                            <td class="tg-cly1"><i class="fa fa-eye" style="font-size:24px"></i></td>
+                            <td class="tg-cly1"><i class="arrow aright" onclick="moveright()"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-cly1" colspan="3"><i class="arrow adown" onclick="movedown()"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="tg" style="float:left;">
+                    <tbody>
+                        <tr>
+                            <td class="tg-cly1" colspan="3"><i class="arrow aup" onclick="moveup()"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-cly1"><i class="arrow aleft" onclick="moveleft()"></i></td>
+                            <td class="tg-cly1"><i class="fa fa-eye" style="font-size:24px"></i></td>
+                            <td class="tg-cly1"><i class="arrow aright" onclick="moveright()"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-cly1" colspan="3"><i class="arrow adown" onclick="movedown()"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mySVGBox column middle">
+            <object id="mySVGExternal" data="./ghost.svg" type="image/svg+xml" width="400" height="480"></object>
+            <br />
+        </div>
+
+        <!-- <div id="myDisplayBoxTitle column right"></div> -->
+        <div id="myXMLDisplay" class="myDisplayBox column right"></div>
+    </div>
+
+    <script type="text/javascript">
+        //
+        // REFERENCING THE SVG
+        //
+
+        // get reference to the inline SVG
+        var svgInline = document.getElementById('mySVGInline');
+        // console.log(svgInline);
+        // get reference to the external SVG (loaded as object)
+        var svgExternal = document.getElementById('mySVGExternal');
+        // console.log(svgExternal);
+        // if you have more than one inline SVGs; you can index them!
+        var svg = document.getElementsByTagName('svg')[0];
+        // console.log(svg);
+
+        //
+        // REFERENCING ELEMENTS
+        //
+
+        // inline reference
+        var element = document.getElementById('circle');
+        // move the selected inline element 50px to right
+        var cx = parseFloat(element.getAttributeNS(null, 'cx'));
+        element.setAttributeNS(null, 'cx', cx + 50);
+
+
+        // external reference
+        window.addEventListener("load", function () {
+            var svgObject = document.getElementById('mySVGExternal').getSVGDocument(); // or .contentDocument
+            var element = svgObject.getElementById('circle');
+            // move the selected inline element 50px to right
+            var cx = parseFloat(element.getAttributeNS(null, 'cx'));
+            element.setAttributeNS(null, 'cx', cx + 50);
+        });
+
+
+        //
+        // ADDING NEW ELEMENTS 
+        //
+        var svgNS = "http://www.w3.org/2000/svg";
+        var circle = document.createElementNS(svgNS, "circle");
+        circle.setAttributeNS(null, "cx", 150);
+        circle.setAttributeNS(null, "cy", 50);
+        circle.setAttributeNS(null, "r", 10);
+        circle.setAttributeNS(null, "fill", "green");
+        circle.setAttributeNS(null, "stroke", "black");
+        svgInline.appendChild(circle);
+
+        // display the SVG as XML to the diaplay box
+        // access the SVG Content as <xml>
+        /**
+    var displayBox = document.getElementById('myXMLDisplay');
+    displayBox.textContent = svgInline.innerHTML;
+    document.getElementById('myDisplayBoxTitle').innerHTML = "Inline SVG!";
+    */
+
+        // external reference
+        window.addEventListener("load", function () {
+            var svgObject = document.getElementById('mySVGExternal').contentDocument.rootElement; // or .documentElement
+            var svgNS = "http://www.w3.org/2000/svg";
+            var circle = document.createElementNS(svgNS, "circle");
+            circle.setAttributeNS(null, "cx", 150);
+            circle.setAttributeNS(null, "cy", 50);
+            circle.setAttributeNS(null, "r", 10);
+            circle.setAttributeNS(null, "fill", "blue");
+            circle.setAttributeNS(null, "stroke", "black");
+            svgObject.appendChild(circle);
+
+            // display the SVG as XML to the display box
+            // access the SVG Content as <xml>
+            var displayBox = document.getElementById('myXMLDisplay');
+            displayBox.textContent = svgObject.innerHTML;
+            document.getElementById('myDisplayBoxTitle').innerHTML = "Current Externally-loaded SVG !";
+        });
+    </script>
+
+
+
+</body>
+
+</html>
