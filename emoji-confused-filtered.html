@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<center>
+
+<h1>An Animated "Confused" Emoji created using SVG </h1>
+<svg version="1.1"
+     width="200" height="200"
+     viewBox="0 0 200 200"
+     xmlns="http://www.w3.org/2000/svg">
+
+   <defs>
+     <!-- some linear gradients -->
+     <linearGradient id="emojiLinearGradient" gradientTransform="rotate(90)">
+       <stop offset="5%"  stop-color="yellow" />
+       <stop offset="90%" stop-color="gold" />
+     </linearGradient>
+     <linearGradient id="eyeGradient" gradientTransform="rotate(90)">
+       <stop offset="10%"  stop-color="brown" />
+       <stop offset="90%" stop-color="black" />
+     </linearGradient>,
+     <linearGradient id="mouthGradient" gradientTransform="rotate(90)">
+       <stop offset="10%"  stop-color="brown" />
+       <stop offset="90%" stop-color="black" />
+     </linearGradient>
+     <!-- Radial Gradient -->
+     <radialGradient id="emojiRadialGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+       <stop offset="0%" style="stop-color:yellow;" />
+       <stop offset="100%" style="stop-color:gold;" />
+     </radialGradient>
+   </defs>
+
+   <!-- Draw a (mostly) Yellow Circle with a Black Circumference and a Gradient -->
+   <circle cx="100" cy="100" r="50" stroke="black" stroke-width="2" fill="url('#emojiRadialGradient')" />
+   <ellipse cx="80" cy="90" rx="5" ry="8" stroke="black" stroke-width="1" fill="url('#eyeGradient')" />
+   <ellipse cx="120" cy="90" rx="5" ry="8" stroke="black" stroke-width="1" fill="url('#eyeGradient')" />
+
+   <path d="M 85 130 C 85 120, 115 115, 115 120"
+         style="stroke:rgb(0,0,0);stroke-width:3"
+         fill="url('#mouthGradient')"/>
+
+   <!-- Message to display if SVG not supported by Graphics Renderer -->
+   Sorry, this browser does not support inline SVG.
+
+</svg>
+</center>
+</body>
+</html>

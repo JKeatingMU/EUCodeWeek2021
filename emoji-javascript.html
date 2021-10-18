@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<center>
+
+<h1>A "Confused" Emoji created using SVG </h1>
+
+<svg id ="emoji" version="1.1"
+     width="200" height="200"
+     viewBox="0 0 200 200"
+     xmlns="http://www.w3.org/2000/svg">
+
+   <!-- face -->
+   <circle id="face" cx="100" cy="100" r="50" stroke="black" stroke-width="2" fill="yellow" />
+
+   <!-- eyes -->
+   <ellipse cx="80" cy="90" rx="5" ry="8" stroke="black" stroke-width="2" fill="black" />
+   <ellipse cx="120" cy="90" rx="5" ry="8" stroke="black" stroke-width="2" fill="black"
+      onmouseover="this.style.fill = 'red'; this.style.stroke = 'red'; this.style['stroke-width'] = 5;"
+      onmouseout="this.style.fill = 'black'; this.style.stroke = 'black'; this.style['stroke-width'] = 2;"
+   />
+
+   <!-- mouth -->
+   <path d="M 85 130 C 85 120, 115 115, 115 120"
+         style="stroke:rgb(0,0,0);stroke-width:3"
+         fill="transparent"/>
+
+   <!-- Message to display if SVG not supported by Graphics Renderer -->
+   Sorry, this browser does not support inline SVG.
+
+</svg>
+
+<script>
+    function updateEmojiPink() {
+        document.getElementById("face").setAttribute("fill", "Magenta");
+    }
+    function updateEmojiYellow() {
+        document.getElementById("face").setAttribute("fill", "Yellow");
+    }
+    function updateEmojiSmaller() {
+        document.getElementById("emoji").setAttribute("width", "100");
+        document.getElementById("emoji").setAttribute("height", "100");
+    }
+    function updateEmojiBigger() {
+        document.getElementById("emoji").setAttribute("width", "200");
+        document.getElementById("emoji").setAttribute("height", "200");
+    }
+</script>
+
+<br />
+
+<input id="svgButton" type="button" value="Pink!" onclick="updateEmojiPink()"/>
+<input id="svgButton" type="button" value="-" onclick="updateEmojiSmaller()"/>
+<input id="svgButton" type="button" value="+" onclick="updateEmojiBigger()"/>
+<input id="svgButton" type="button" value="Yellow!" onclick="updateEmojiYellow()"/>
+
+<br />
+
+<script>
+var faceSlider = function(slider, direction) {
+    var value = slider.value;
+    var face = document.getElementById("face");
+    var coord = "c" + direction;
+    face.setAttributeNS(null, coord, value * 3);
+}
+</script>
+
+<br />
+
+<span style="font-family:sans-serif">cx:</span> <input type="range" min="20" max="40" value="30" oninput="faceSlider(this, 'x')"/>
+<span style="font-family:sans-serif">cy:</span> <input type="range" min="20" max="40" value="30" oninput="faceSlider(this, 'y')"/>
+
+</center>
+</body>
+</html>

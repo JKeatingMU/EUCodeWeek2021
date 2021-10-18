@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<center>
+
+<h1>An Animated "Confused" Kaomoji created using SVG (Brows)</h1>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="200" height="200">
+
+   <!-- Draw a Yellow Circle with a Black Circumference -->
+   <circle cx="100" cy="100" r="50" stroke="black" stroke-width="2" fill="yellow" />
+
+   <!-- Draw a White Circle with a Black Background and a Black Dot -->
+   <circle cx="80" cy="95" r="13" stroke="black" stroke-width="2" fill="white" />
+   <circle cx="80" cy="90" r="5" stroke="black" stroke-width="2" fill="black">
+      <animate id="one" attributeName="cy" attributeType="XML"
+             from="90"  to="95"
+             begin="0s; two.end" dur="2s" />
+      <animate id="two" attributeName="cy" attributeType="XML"
+             from="95"  to="90"
+             begin="one.end" dur="2s" />
+   </circle>
+
+   <!-- Draw a White Circle with a Black Background and a Black Dot -->
+   <circle cx="120" cy="95" r="13" stroke="black" stroke-width="2" fill="white" />
+   <circle cx="120" cy="90" r="5" stroke="black" stroke-width="2" fill="black">
+         <animate id="one" attributeName="cy" attributeType="XML"
+             from="90"  to="95"
+             begin="0s;two.end" dur="2s" />
+      <animate id="two" attributeName="cy" attributeType="XML"
+             from="95"  to="90"
+             begin="one.end" dur="2s" />
+   </circle>
+
+   <!-- Draw a Black Horizontal Line -->
+   <line x1="85" y1="120" x2="115" y2="120" style="stroke:rgb(0,0,0);stroke-width:3" />
+
+
+   <path d="M 70 80 C 70 75, 90 75, 90 80"
+         style="stroke:rgb(0,0,0);stroke-width:2"
+         fill="transparent"/>
+
+   <path d="M 110 80 C 110 75, 130 75, 130 80"
+         style="stroke:rgb(0,0,0);stroke-width:2"
+         fill="transparent"/>
+
+   <!-- Message to display if SVG not supported by Graphics Renderer -->
+   Sorry, this browser does not support inline SVG.
+
+</svg>
+</center>
+</body>
+</html>

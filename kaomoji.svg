@@ -1,0 +1,14 @@
+<svg version="1.1"
+     width="200" height="200"
+     viewBox="0 0 200 200"
+     xmlns="http://www.w3.org/2000/svg">
+     
+   <circle cx="100" cy="100" r="50" stroke="black" stroke-width="2" fill="yellow" />
+   <circle cx="80" cy="95" r="13" stroke="black" stroke-width="2" fill="white" />
+   <circle cx="80" cy="90" r="5" stroke="black" stroke-width="2" fill="black" />
+   <circle cx="120" cy="95" r="13" stroke="black" stroke-width="2" fill="white" />
+   <circle cx="120" cy="90" r="5" stroke="black" stroke-width="2" fill="black" />
+
+   <line x1="85" y1="120" x2="115" y2="120" style="stroke:rgb(0,0,0);stroke-width:3" />
+   Sorry, this browser does not support inline SVG.
+</svg>

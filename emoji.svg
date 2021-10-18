@@ -1,0 +1,21 @@
+<svg version="1.1"
+     width="200" height="200"
+     viewBox="0 0 200 200"
+     xmlns="http://www.w3.org/2000/svg">
+
+   <!-- face -->
+   <circle cx="100" cy="100" r="50" stroke="black" stroke-width="2" fill="yellow" />
+
+   <!-- eyes -->
+   <ellipse cx="80" cy="90" rx="5" ry="8" stroke="black" stroke-width="2" fill="black" />
+   <ellipse cx="120" cy="90" rx="5" ry="8" stroke="black" stroke-width="2" fill="black" />
+
+   <!-- mouth -->
+   <path d="M 85 130 C 85 120, 115 115, 115 120"
+         style="stroke:rgb(0,0,0);stroke-width:3"
+         fill="transparent"/>
+
+   <!-- Message to display if SVG not supported by Graphics Renderer -->
+   Sorry, this browser does not support inline SVG.
+
+</svg>
